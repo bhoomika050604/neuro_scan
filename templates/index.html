@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroScan — Parkinson's Disease AI Diagnostics</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" onerror="this.remove()">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- ─── HEADER ──────────────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-group">
+      <div class="logo-icon">
+        <svg viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="20" stroke="var(--accent)" stroke-width="1.5"/><path d="M14 22c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/><circle cx="22" cy="28" r="3" fill="var(--accent)"/><line x1="22" y1="8" x2="22" y2="12" stroke="var(--accent-dim)" stroke-width="1" stroke-linecap="round"/><line x1="8" y1="22" x2="12" y2="22" stroke="var(--accent-dim)" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="22" x2="36" y2="22" stroke="var(--accent-dim)" stroke-width="1" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <h1 class="logo-text">NeuroScan</h1>
+        <p class="logo-sub">Parkinson's AI Diagnostics</p>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <span class="nav-badge">Research Tool</span>
+      <span class="nav-badge accent">5 Modalities</span>
+    </nav>
+  </div>
+</header>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">AI-Powered Multimodal Analysis</div>
+    <h2 class="hero-title">Early Detection of<br><em>Parkinson's Disease</em></h2>
+    <p class="hero-desc">A research-grade diagnostic system analyzing five independent biomarker modalities — speech acoustics, gait kinematics, blood biomarkers, clinical symptoms, and brain MRI — to provide a comprehensive risk assessment.</p>
+
+  </div>
+</section>
+
+<!-- ─── MAIN CONTENT ─────────────────────────────────────────────────── -->
+<main class="app-main">
+
+  <!-- ── TAB NAV ── -->
+  <div class="tab-rail">
+    <button class="tab-btn active" data-tab="speech">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M8 22h8"/></svg>
+      Speech
+    </button>
+    <button class="tab-btn" data-tab="gait">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 4a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm-6 3 2 6 2-2 3 5"/><path d="m9 13-2 7M14 9l2 3-3 1"/></svg>
+      Gait
+    </button>
+    <button class="tab-btn" data-tab="biomarkers">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+      Biomarkers
+    </button>
+    <button class="tab-btn" data-tab="clinical">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2Z"/></svg>
+      Clinical
+    </button>
+    <button class="tab-btn" data-tab="mri">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/></svg>
+      Brain MRI
+    </button>
+    <button class="tab-btn" data-tab="results">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+      Results
+    </button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ── SPEECH TAB ── -->
+  <div class="tab-panel active" id="tab-speech">
+    <div class="panel-header">
+      <h3>Speech Analysis</h3>
+      <p>Vocal tremor, jitter, shimmer, HNR, and pitch entropy are analyzed from sustained phonation or conversational speech.</p>
+    </div>
+    <div class="two-col">
+      <!-- Upload -->
+      <div class="card">
+        <div class="card-label">Upload Audio File</div>
+        <div class="drop-zone" id="speech-drop">
+          <div class="drop-icon">🎵</div>
+          <p>Drag & drop or <label for="speech-file" class="link-label">browse file</label></p>
+          <p class="drop-hint">WAV, MP3, OGG supported · Or upload a <strong style="color:var(--accent)">feature CSV/TXT file</strong> (26 columns) for direct prediction</p>
+          <input type="file" id="speech-file" accept=".wav,.mp3,.ogg,.webm,.m4a" hidden>
+        </div>
+        <div id="speech-file-info" class="file-info hidden"></div>
+        <button class="btn-primary" id="speech-upload-btn" disabled>Analyze Audio</button>
+      </div>
+      <!-- Record -->
+      <div class="card">
+        <div class="card-label">Record Live Audio</div>
+        <div class="record-zone">
+          <div class="record-visual" id="speech-waveform">
+            <div class="wave-bars">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="record-hint">Say "Aaaaah" for 5 seconds or read a sentence</div>
+          <div class="record-controls">
+            <button class="btn-record" id="speech-record-btn">
+              <span class="rec-dot"></span> Record
+            </button>
+            <button class="btn-secondary" id="speech-stop-btn" disabled>Stop</button>
+            <button class="btn-primary" id="speech-analyze-rec-btn" disabled>Analyze</button>
+          </div>
+          <div id="speech-timer" class="rec-timer hidden">00:00</div>
+        </div>
+      </div>
+    </div>
+    <div id="speech-result" class="result-panel hidden"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ── GAIT TAB ── -->
+  <div class="tab-panel" id="tab-gait">
+    <div class="panel-header">
+      <h3>Gait Analysis</h3>
+      <p>Enter gait measurements directly, or upload your gait CSV file. Model trained on real park vs control data (gait speed, age, height, weight, severity).</p>
+    </div>
+    <div class="two-col">
+      <!-- Gait Form -->
+      <div class="card">
+        <div class="card-label">Enter Gait Measurements</div>
+        <div class="form-section" style="border:none;padding:0;gap:12px">
+          <div class="field-group">
+            <label>Age <span class="unit">(years)</span></label>
+            <input type="number" min="10" max="100" id="gait-age" placeholder="e.g. 65" class="num-input">
+          </div>
+          <div class="field-group">
+            <label>Height <span class="unit">(meters)</span></label>
+            <input type="number" step="0.01" min="1.0" max="2.5" id="gait-height" placeholder="e.g. 1.75" class="num-input">
+          </div>
+          <div class="field-group">
+            <label>Weight <span class="unit">(kg)</span></label>
+            <input type="number" step="0.1" min="20" max="200" id="gait-weight" placeholder="e.g. 72" class="num-input">
+          </div>
+          <div class="field-group">
+            <label>Gender</label>
+            <select id="gait-gender" class="select-input">
+              <option value="m">Male</option>
+              <option value="f">Female</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Gait Speed <span class="unit">(m/sec)</span><span class="ref">Normal: 1.2–1.5</span></label>
+            <input type="number" step="0.01" min="0.1" max="3.0" id="gait-speed" placeholder="e.g. 1.25" class="num-input">
+          </div>
+          <div class="slider-group">
+            <label>Disease Severity / Duration <span class="slider-val" id="gait-sev-val">0</span></label>
+            <input type="range" min="0" max="4" step="0.5" value="0" id="gait-severity" class="slider">
+            <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text3);margin-top:2px"><span>None</span><span>Mild</span><span>Moderate</span><span>Severe</span></div>
+          </div>
+        </div>
+        <button class="btn-primary" id="gait-form-btn">Analyze Gait</button>
+      </div>
+
+      <!-- CSV Upload -->
+      <div class="card">
+        <div class="card-label">Upload Gait CSV File</div>
+        <div class="drop-zone" id="gait-drop">
+          <div class="drop-icon">📊</div>
+          <p>Drag & drop or <label for="gait-file" class="link-label">browse CSV</label></p>
+          <p class="drop-hint">Tab or comma separated · Columns: subject, group, age, height, weight, gender, gait_speed, severity</p>
+          <input type="file" id="gait-file" accept=".csv,.txt,.tsv" hidden>
+        </div>
+        <div id="gait-file-info" class="file-info hidden"></div>
+        <button class="btn-primary" id="gait-upload-btn" disabled>Analyze CSV</button>
+
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+          <div class="card-label" style="margin-bottom:10px">Record via Camera</div>
+          <div class="camera-zone">
+            <video id="gait-camera" class="camera-preview" autoplay muted playsinline></video>
+            <div class="camera-placeholder" id="gait-cam-placeholder">
+              <div class="cam-icon">📷</div>
+              <p>Camera feed will appear here</p>
+            </div>
+            <div class="camera-overlay-hint">Walk sideways — full body in frame (requires mediapipe)</div>
+          </div>
+          <div class="record-controls" style="margin-top:10px">
+            <button class="btn-secondary" id="gait-cam-start">Start Camera</button>
+            <button class="btn-record" id="gait-rec-btn" disabled><span class="rec-dot"></span> Record</button>
+            <button class="btn-secondary" id="gait-stop-btn" disabled>Stop</button>
+            <button class="btn-primary" id="gait-analyze-rec-btn" disabled>Analyze</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="gait-result" class="result-panel hidden"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ── BIOMARKERS TAB ── -->
+  <div class="tab-panel" id="tab-biomarkers">
+    <div class="panel-header">
+      <h3>Blood Biomarker Panel</h3>
+      <p>Enter laboratory values. Leave blank if not available — partial panels are accepted.</p>
+    </div>
+    <div class="form-grid">
+      <div class="form-section">
+        <div class="form-section-title">Protein Markers</div>
+        <div class="field-group">
+          <label>α-Synuclein <span class="unit">(ng/mL)</span><span class="ref">Normal: 0.5–2.0</span></label>
+          <input type="number" step="0.01" min="0" id="bio-alpha-syn" placeholder="e.g. 1.2" class="num-input">
+        </div>
+        <div class="field-group">
+          <label>DJ-1 Protein <span class="unit">(ng/mL)</span><span class="ref">Normal: 1.5–4.5</span></label>
+          <input type="number" step="0.01" min="0" id="bio-dj1" placeholder="e.g. 3.2" class="num-input">
+        </div>
+        <div class="field-group">
+          <label>Neurofilament Light (NfL) <span class="unit">(pg/mL)</span><span class="ref">Normal: 5–15</span></label>
+          <input type="number" step="0.1" min="0" id="bio-nfl" placeholder="e.g. 12.5" class="num-input">
+        </div>
+        <div class="field-group">
+          <label>GFAP <span class="unit">(pg/mL)</span><span class="ref">Normal: 50–200</span></label>
+          <input type="number" step="1" min="0" id="bio-gfap" placeholder="e.g. 120" class="num-input">
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-title">Metabolic & Inflammatory</div>
+        <div class="field-group">
+          <label>Uric Acid <span class="unit">(mg/dL)</span><span class="ref">Normal: 3.5–7.2</span></label>
+          <input type="number" step="0.1" min="0" id="bio-uric" placeholder="e.g. 5.2" class="num-input">
+        </div>
+        <div class="field-group">
+          <label>TNF-α <span class="unit">(pg/mL)</span><span class="ref">Normal: 1–4</span></label>
+          <input type="number" step="0.1" min="0" id="bio-tnf" placeholder="e.g. 2.5" class="num-input">
+        </div>
+        <div class="field-group">
+          <label>IL-6 <span class="unit">(pg/mL)</span><span class="ref">Normal: 0.5–3</span></label>
+          <input type="number" step="0.1" min="0" id="bio-il6" placeholder="e.g. 1.8" class="num-input">
+        </div>
+        <div class="field-group">
+          <label>DOPAC <span class="unit">(nmol/L)</span><span class="ref">Normal: 200–600</span></label>
+          <input type="number" step="1" min="0" id="bio-dopac" placeholder="e.g. 380" class="num-input">
+        </div>
+      </div>
+    </div>
+    <button class="btn-primary btn-wide" id="bio-submit-btn">Analyze Biomarkers</button>
+    <div id="bio-result" class="result-panel hidden"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ── CLINICAL TAB ── -->
+  <div class="tab-panel" id="tab-clinical">
+    <div class="panel-header">
+      <h3>Clinical Assessment</h3>
+      <p>Structured input of motor and non-motor symptoms, risk factors, and UPDRS scores.</p>
+    </div>
+    <div class="form-grid">
+      <div class="form-section">
+        <div class="form-section-title">Demographics & Risk</div>
+        <div class="field-group">
+          <label>Age <span class="unit">(years)</span></label>
+          <input type="number" min="18" max="100" id="cl-age" placeholder="e.g. 65" class="num-input">
+        </div>
+        <div class="field-group">
+          <label>Sex</label>
+          <select id="cl-sex" class="select-input">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Symptom Duration <span class="unit">(years)</span></label>
+          <input type="number" step="0.5" min="0" id="cl-duration" placeholder="e.g. 2.5" class="num-input">
+        </div>
+        <div class="form-section-title" style="margin-top:16px">Risk Factors</div>
+        <div class="check-grid">
+          <label class="check-label"><input type="checkbox" id="cl-family"> Family history of PD</label>
+          <label class="check-label"><input type="checkbox" id="cl-pesticide"> Pesticide exposure</label>
+          <label class="check-label"><input type="checkbox" id="cl-trauma"> Head trauma history</label>
+          <label class="check-label"><input type="checkbox" id="cl-smoking"> Smoking history</label>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-title">Motor Symptoms (0–4 scale)</div>
+        <div class="slider-group">
+          <label>Resting Tremor <span class="slider-val" id="tremor-val">0</span></label>
+          <input type="range" min="0" max="4" step="1" value="0" id="cl-tremor" class="slider">
+        </div>
+        <div class="slider-group">
+          <label>Rigidity <span class="slider-val" id="rigidity-val">0</span></label>
+          <input type="range" min="0" max="4" step="1" value="0" id="cl-rigidity" class="slider">
+        </div>
+        <div class="slider-group">
+          <label>Bradykinesia <span class="slider-val" id="brady-val">0</span></label>
+          <input type="range" min="0" max="4" step="1" value="0" id="cl-brady" class="slider">
+        </div>
+        <div class="slider-group">
+          <label>Postural Instability <span class="slider-val" id="postural-val">0</span></label>
+          <input type="range" min="0" max="4" step="1" value="0" id="cl-postural" class="slider">
+        </div>
+        <div class="field-group" style="margin-top:8px">
+          <label>UPDRS Total Score <span class="unit">(0–132)</span></label>
+          <input type="number" min="0" max="132" id="cl-updrs" placeholder="e.g. 28" class="num-input">
+        </div>
+        <div class="form-section-title" style="margin-top:12px">Motor Signs</div>
+        <div class="check-grid">
+          <label class="check-label"><input type="checkbox" id="cl-micro"> Micrographia</label>
+          <label class="check-label"><input type="checkbox" id="cl-hypo"> Hypophonia</label>
+          <label class="check-label"><input type="checkbox" id="cl-mask"> Masked face</label>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-title">Non-Motor Symptoms</div>
+        <div class="check-grid">
+          <label class="check-label"><input type="checkbox" id="cl-anosmia"> Loss of smell (anosmia)</label>
+          <label class="check-label"><input type="checkbox" id="cl-rem"> REM sleep disorder</label>
+          <label class="check-label"><input type="checkbox" id="cl-constip"> Chronic constipation</label>
+          <label class="check-label"><input type="checkbox" id="cl-depress"> Depression</label>
+          <label class="check-label"><input type="checkbox" id="cl-cogdecline"> Cognitive decline</label>
+          <label class="check-label"><input type="checkbox" id="cl-ortho"> Orthostatic hypotension</label>
+        </div>
+      </div>
+    </div>
+    <button class="btn-primary btn-wide" id="cl-submit-btn">Analyze Clinical Data</button>
+    <div id="cl-result" class="result-panel hidden"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ── MRI TAB ── -->
+  <div class="tab-panel" id="tab-mri">
+    <div class="panel-header">
+      <h3>Brain MRI Analysis</h3>
+      <p>Upload T1/T2-weighted or DTI MRI images. Analyzes substantia nigra volume, fractional anisotropy, and free water fraction.</p>
+    </div>
+    <div class="card mri-card">
+      <div class="drop-zone large" id="mri-drop">
+        <div class="drop-icon">🧠</div>
+        <p>Drag & drop MRI scan or <label for="mri-file" class="link-label">browse</label></p>
+        <p class="drop-hint">NIfTI (.nii, .nii.gz), DICOM (.dcm), PNG/JPEG · T1/T2/DTI accepted</p>
+        <input type="file" id="mri-file" accept=".nii,.gz,.dcm,.png,.jpg,.jpeg" hidden>
+      </div>
+      <div id="mri-file-info" class="file-info hidden"></div>
+      <div id="mri-preview-wrap" class="hidden">
+        <img id="mri-preview" class="mri-preview-img" alt="MRI preview">
+      </div>
+      <button class="btn-primary btn-wide" id="mri-submit-btn" disabled>Analyze MRI</button>
+    </div>
+    <div id="mri-result" class="result-panel hidden"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ── RESULTS TAB ── -->
+  <div class="tab-panel" id="tab-results">
+    <div class="panel-header">
+      <h3>Multimodal Fusion Results</h3>
+      <p>Combine all analyzed modalities for a comprehensive risk assessment using confidence-weighted late fusion.</p>
+    </div>
+
+    <div class="modality-status-grid" id="modality-status-grid">
+      <div class="mod-status-card" id="ms-speech"><div class="ms-icon">🎙</div><div class="ms-name">Speech</div><div class="ms-status">Pending</div></div>
+      <div class="mod-status-card" id="ms-gait"><div class="ms-icon">🚶</div><div class="ms-name">Gait</div><div class="ms-status">Pending</div></div>
+      <div class="mod-status-card" id="ms-biomarkers"><div class="ms-icon">🧪</div><div class="ms-name">Biomarkers</div><div class="ms-status">Pending</div></div>
+      <div class="mod-status-card" id="ms-clinical"><div class="ms-icon">📋</div><div class="ms-name">Clinical</div><div class="ms-status">Pending</div></div>
+      <div class="mod-status-card" id="ms-mri"><div class="ms-icon">🧠</div><div class="ms-name">MRI</div><div class="ms-status">Pending</div></div>
+    </div>
+
+    <button class="btn-primary btn-wide btn-fuse" id="fuse-btn" disabled>
+      Run Multimodal Fusion Analysis
+    </button>
+
+    <div id="fusion-result" class="fusion-result hidden">
+      <div class="fusion-header">
+        <div class="fusion-gauge-wrap">
+          <canvas id="gauge-canvas" width="220" height="130"></canvas>
+          <div class="gauge-label">
+            <span id="gauge-pct">—</span>
+            <span class="gauge-sub">Risk Score</span>
+          </div>
+        </div>
+        <div class="fusion-meta">
+          <div class="fusion-risk-badge" id="fusion-risk-badge">—</div>
+          <p id="fusion-interpretation"></p>
+          <div class="fusion-rec-box">
+            <div class="rec-label">Recommendation</div>
+            <p id="fusion-recommendation"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fusion-bars" id="fusion-bars"></div>
+
+      <div class="disclaimer-box">
+        <span class="disclaimer-icon">⚕️</span>
+        <p id="fusion-disclaimer"></p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>NeuroScan — Research Prototype · Not for clinical use</p>
+  </div>
+</footer>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay hidden" id="loading-overlay">
+  <div class="loading-box">
+    <div class="loading-spinner"></div>
+    <p id="loading-text">Analyzing...</p>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
