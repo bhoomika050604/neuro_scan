@@ -1,0 +1,30 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# Uploads (user data - don't commit)
+uploads/speech/*
+uploads/gait/*
+uploads/mri/*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+*.env
+
+# Keep upload folders but not contents
+!uploads/speech/.gitkeep
+!uploads/gait/.gitkeep
+!uploads/mri/.gitkeep
